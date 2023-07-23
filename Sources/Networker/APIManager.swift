@@ -10,16 +10,17 @@ import Alamofire
 
 public class APIManager{
     
-    var session:Session
-    
-    init(session: Session) {
-        self.session = session
-    }
+    private let configManager = ConfigurationManager.shared
     
     public func makeRequest<T:Decodable>(with request:URLRequestConvertible,for response:T.Type) async throws -> T{
-        
         return try await withCheckedThrowingContinuation{ continuation in
-            session.request(request).responseData { dataResponse in
+            let dataRequest = configManager.session.request(request)
+            
+            if configManager.session.interceptor != nil{
+                dataRequest.validate()
+            }
+            
+            dataRequest.responseData { dataResponse in
                 switch dataResponse.result{
                 case .success(let dataObject):
                     if let statusCode = dataResponse.response?.statusCode{
