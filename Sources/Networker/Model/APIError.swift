@@ -22,6 +22,7 @@ public enum APIError: Error,LocalizedError{
     case BadGateway //502
     case ServiceUnavailable //503
     case GatewayTimeout //504
+    case NoInternetConnection
     
     
     
@@ -54,6 +55,8 @@ public enum APIError: Error,LocalizedError{
             return "Service Unavailable"
         case .GatewayTimeout:
             return "Gateway Timeout"
+        case .NoInternetConnection:
+            return "No Active Internet Connection"
         }
     }
     
