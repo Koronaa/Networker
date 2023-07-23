@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "BEECA700-0F81-4B6B-B0BE-7166AF62617B",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "NetworkerTests",
+        "name" : "NetworkerTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -13,14 +13,26 @@ public class ConfigurationManager{
     public static let shared = ConfigurationManager()
     
     var session:Session!
-    var urlSessionConfiguration:URLSessionConfiguration!
-    var requestInterceptor:RequestInterceptor?
+    var requestRetryLimit:Int?
+    var requestRetryDelay:TimeInterval?
+    
+    private var urlSessionConfiguration:URLSessionConfiguration!
     
     private init (){}
     
     public func setSession(using urlSessionConfiguration:URLSessionConfiguration,requestInterceptor:RequestInterceptor? = nil){
         self.session = Session(configuration: urlSessionConfiguration,interceptor: requestInterceptor)
     }
+    
+    public func setRequestRetry(delay val1:TimeInterval, limit val2:Int){
+        if session.interceptor == nil{
+            fatalError("Request Interceptor cannot be nil, invoke setSession(using urlSessionConfiguration:URLSessionConfiguration,requestInterceptor:RequestInterceptor)")
+        }
+        requestRetryDelay = val1
+        requestRetryLimit = val2
+    }
+    
+    
     
 }
 

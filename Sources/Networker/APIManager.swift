@@ -17,9 +17,10 @@ public class APIManager{
         return try await withCheckedThrowingContinuation{ continuation in
             
             if NetworkReachabilityManager()?.isReachable ?? false{
-                let dataRequest = configManager.session.request(request)
+                let session = configManager.session!
+                let dataRequest = session.request(request)
                 
-                if configManager.session.interceptor != nil{
+                if session.interceptor != nil{
                     dataRequest.validate()
                 }
                 
@@ -29,9 +30,8 @@ public class APIManager{
                         if let statusCode = dataResponse.response?.statusCode{
                             switch statusCode{
                             case 200...299:
-                                let decoder = JSONDecoder()
                                 do{
-                                    let decodedObject = try decoder.decode(T.self, from: dataObject)
+                                    let decodedObject = try JSONDecoder().decode(T.self, from: dataObject)
                                     continuation.resume(returning: decodedObject)
                                 }catch (let e){
                                     continuation.resume(throwing: APIError.DecodeError(error: e))
