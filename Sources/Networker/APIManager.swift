@@ -12,6 +12,8 @@ public class APIManager{
     
     private let configManager = ConfigurationManager.shared
     
+    public init(){}
+    
     public func makeRequest<T:Decodable>(with request:URLRequestConvertible,for response:T.Type) async throws -> T{
         
         return try await withCheckedThrowingContinuation{ continuation in
