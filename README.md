@@ -31,7 +31,7 @@ dependencies: [
 ```
 ### Usage
 
-Please refer to the sample app [here]()
+Please refer to the sample app [here](https://github.com/Koronaa/NetworkerSample)
 
 ### Release History
 
